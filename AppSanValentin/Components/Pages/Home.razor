@@ -1,0 +1,76 @@
+﻿@page "/"
+@inject NavigationManager Navigation
+<div class="valentine-container">
+    <h2>💌 ¿Siempre estarás a mi lado, en los momentos buenos y en los malos, sin importar las circunstancias? 💌</h2>
+    <div class="options-container">
+        <input type="radio" id="optionYes" name="option" value="yes" @onchange="OnOptionChanged">
+        <label for="optionYes">Sí, siempre estaré a tu lado</label><br>
+        <input type="radio" id="optionNo" name="option" value="no" @onchange="OnOptionChanged">
+        <label for="optionNo">No, no siempre podré estar a tu lado</label><br>
+    </div>
+    <button @onclick="CheckAnswer">Continuar</button>
+</div>
+
+<style>
+    .valentine-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #ffe3ed;
+        font-family: 'Marck Script', cursive;
+        color: #ff477e;
+        text-align: center;
+        padding: 20px;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        font-size: 2rem;
+    }
+
+    .options-container {
+        margin-bottom: 20px;
+    }
+
+    input[type="radio"] {
+        margin-right: 10px;
+    }
+
+    button {
+        background-color: #ff477e;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        button:hover {
+            background-color: #ff6b91;
+        }
+</style>
+
+@code {
+    private string selectedOption;
+
+    private void OnOptionChanged(ChangeEventArgs e)
+    {
+        selectedOption = e.Value.ToString();
+    }
+
+    private void CheckAnswer()
+    {
+        if (selectedOption == "yes")
+        {
+            Navigation.NavigateTo("/counter");
+        }
+        else
+        {
+            Navigation.NavigateTo("/disappointment");
+        }
+    }
+}
